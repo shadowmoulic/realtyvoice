@@ -2,13 +2,15 @@
 import { useState, useEffect } from 'react';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { supabase } from '@/lib/supabase';
 
 interface Blog {
-    id: number;
+    id: string; // Changed to string (UUID)
     title: string;
     content: string;
-    image: string;
-    date: string;
+    image_url: string; // Changed from image
+    created_at: string; // Changed from date
+    slug: string;
 }
 
 export default function AdminPortal() {
@@ -16,20 +18,26 @@ export default function AdminPortal() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const [blogTitle, setBlogTitle] = useState('');
     const [blogContent, setBlogContent] = useState('');
     const [blogImage, setBlogImage] = useState('');
     const [blogs, setBlogs] = useState<Blog[]>([]);
 
-    // Load blogs from local storage on mount - using microtask to avoid cascading renders error
+    // Fetch blogs from Supabase
     useEffect(() => {
-        const savedBlogs = localStorage.getItem('realtyvoice_blogs');
-        if (savedBlogs) {
-            Promise.resolve().then(() => {
-                setBlogs(JSON.parse(savedBlogs));
-            });
-        }
+        const fetchBlogs = async () => {
+            const { data, error } = await supabase
+                .from('blogs')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (data) setBlogs(data);
+            if (error) console.error('Error fetching blogs:', error);
+        };
+
+        fetchBlogs();
     }, []);
 
     const handleLogin = (e: React.FormEvent) => {
@@ -42,25 +50,40 @@ export default function AdminPortal() {
         }
     };
 
-    const saveBlog = (e: React.FormEvent) => {
+    const saveBlog = async (e: React.FormEvent) => {
         e.preventDefault();
+        setIsLoading(true);
+
+        const slug = blogTitle.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
         const newBlog = {
-            id: Date.now(),
             title: blogTitle,
             content: blogContent,
-            image: blogImage || 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-            date: new Date().toLocaleDateString()
+            image_url: blogImage || 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+            slug
         };
 
-        const updatedBlogs = [newBlog, ...blogs];
-        setBlogs(updatedBlogs);
-        localStorage.setItem('realtyvoice_blogs', JSON.stringify(updatedBlogs));
+        try {
+            const { data, error } = await supabase
+                .from('blogs')
+                .insert([newBlog])
+                .select();
 
-        // Reset form
-        setBlogTitle('');
-        setBlogContent('');
-        setBlogImage('');
-        alert('Blog saved successfully!');
+            if (error) throw error;
+
+            if (data) {
+                setBlogs([data[0], ...blogs]);
+                // Reset form
+                setBlogTitle('');
+                setBlogContent('');
+                setBlogImage('');
+                alert('Blog saved successfully!');
+            }
+        } catch (err) {
+            console.error('Error saving blog:', err);
+            alert('Error saving blog. Check console.');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     if (!isLoggedIn) {
@@ -136,7 +159,9 @@ export default function AdminPortal() {
                                     style={{ width: '100%', padding: '1rem', background: 'rgba(255, 255, 255, 0.05)', border: '1px solid var(--border-color)', borderRadius: '0.5rem', color: 'white', outline: 'none', fontFamily: 'monospace', resize: 'vertical' }}
                                 ></textarea>
                                 <div style={{ display: 'flex', gap: '1rem' }}>
-                                    <button type="submit" className="btn btn-primary" style={{ flex: 1 }}>Save Blog Post</button>
+                                    <button type="submit" className="btn btn-primary" disabled={isLoading} style={{ flex: 1, opacity: isLoading ? 0.7 : 1 }}>
+                                        {isLoading ? 'Saving...' : 'Save Blog Post'}
+                                    </button>
                                     <button type="button" className="btn btn-outline" style={{ flex: 1 }} onClick={() => { setBlogTitle(''); setBlogContent(''); setBlogImage(''); }}>Clear Draft</button>
                                 </div>
                             </form>
@@ -152,10 +177,10 @@ export default function AdminPortal() {
                                 ) : (
                                     blogs.map((blog) => (
                                         <div key={blog.id} className="glass" style={{ padding: '1.5rem', display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-                                            <div style={{ width: '80px', height: '80px', backgroundSize: 'cover', backgroundImage: `url(${blog.image})`, borderRadius: '0.5rem' }}></div>
+                                            <div style={{ width: '80px', height: '80px', backgroundSize: 'cover', backgroundImage: `url(${blog.image_url})`, borderRadius: '0.5rem' }}></div>
                                             <div>
                                                 <h4 style={{ margin: 0, fontSize: '1.1rem', marginBottom: '0.5rem' }}>{blog.title}</h4>
-                                                <p style={{ margin: 0, fontSize: '0.85rem', opacity: 0.6 }}>Created: {blog.date}</p>
+                                                <p style={{ margin: 0, fontSize: '0.85rem', opacity: 0.6 }}>Created: {new Date(blog.created_at).toLocaleDateString()}</p>
                                             </div>
                                         </div>
                                     ))

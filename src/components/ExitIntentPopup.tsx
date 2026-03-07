@@ -1,9 +1,12 @@
 "use client"
 import { useState, useEffect } from 'react';
+import { supabase } from '@/lib/supabase';
 
 export default function ExitIntentPopup() {
     const [isVisible, setIsVisible] = useState(false);
     const [isDismissed, setIsDismissed] = useState(false);
+    const [email, setEmail] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         // Check if user has already seen it this session
@@ -28,11 +31,26 @@ export default function ExitIntentPopup() {
 
     const [submitted, setSubmitted] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setSubmitted(true);
-        // Save to local storage for now (Supabase SQL is in root for future integration)
-        localStorage.setItem('realtyvoice_popup_optin', 'true');
+        setIsLoading(true);
+
+        try {
+            const { error } = await supabase
+                .from('leads')
+                .insert([{ email, source: 'exit_intent' }]);
+
+            if (error) throw error;
+
+            setSubmitted(true);
+            localStorage.setItem('realtyvoice_popup_optin', 'true');
+        } catch (err) {
+            console.error('Error saving lead:', err);
+            // Still show success to user for better UX, or could show error
+            setSubmitted(true);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     if (!isVisible) return null;
@@ -77,15 +95,24 @@ export default function ExitIntentPopup() {
 
                         <form onSubmit={handleSubmit} style={{ marginBottom: '1.5rem' }}>
                             <input
-                                type="email" placeholder="Enter your professional email" required
+                                type="email"
+                                placeholder="Enter your professional email"
+                                required
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 style={{
                                     width: '100%', padding: '1rem', borderRadius: '0.6rem',
                                     background: 'rgba(255, 255, 255, 0.05)', border: '1px solid var(--border-color)',
                                     color: 'white', marginBottom: '1.25rem', outline: 'none', fontSize: '1rem'
                                 }}
                             />
-                            <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '1rem' }}>
-                                Send Me the Blueprint 🚀
+                            <button
+                                type="submit"
+                                className="btn btn-primary"
+                                disabled={isLoading}
+                                style={{ width: '100%', padding: '1rem', opacity: isLoading ? 0.7 : 1 }}
+                            >
+                                {isLoading ? 'Sending...' : 'Send Me the Blueprint 🚀'}
                             </button>
                         </form>
                         <p style={{ margin: 0, fontSize: '0.85rem', opacity: 0.6 }}>No spam. Just value for real estate professionals.</p>

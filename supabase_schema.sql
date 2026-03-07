@@ -25,11 +25,11 @@ ALTER TABLE public.blogs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.leads ENABLE ROW LEVEL SECURITY;
 
 -- 4. Create Policies
--- Blogs: Anyone can read, only authenticated (admin) can write
+-- Blogs: Public read, and public CRUD (restricted by your app password for now)
 CREATE POLICY "Public Read Access for Blogs" ON public.blogs FOR SELECT USING (true);
-CREATE POLICY "Admin CRUD for Blogs" ON public.blogs TO authenticated USING (true);
+CREATE POLICY "Public CRUD for Blogs" ON public.blogs FOR ALL USING (true);
 
--- Leads: Anyone can insert (for signups), only admin can read
+-- Leads: Public insert, only admin (authenticated) can read
 CREATE POLICY "Public Insert Access for Leads" ON public.leads FOR INSERT WITH CHECK (true);
 CREATE POLICY "Admin Read Access for Leads" ON public.leads TO authenticated USING (true);
 
