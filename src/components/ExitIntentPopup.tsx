@@ -1,8 +1,10 @@
 "use client"
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
+import { useRouter } from 'next/navigation';
 
 export default function ExitIntentPopup() {
+    const router = useRouter();
     const [isVisible, setIsVisible] = useState(false);
     const [isDismissed, setIsDismissed] = useState(false);
     const [email, setEmail] = useState('');
@@ -44,10 +46,18 @@ export default function ExitIntentPopup() {
 
             setSubmitted(true);
             localStorage.setItem('realtyvoice_popup_optin', 'true');
+
+            // Redirect to blueprint access page after 1.5 seconds
+            setTimeout(() => {
+                router.push('/blueprint-access');
+                isVisible && setIsVisible(false);
+            }, 1500);
         } catch (err) {
             console.error('Error saving lead:', err);
-            // Still show success to user for better UX, or could show error
             setSubmitted(true);
+            setTimeout(() => {
+                router.push('/blueprint-access');
+            }, 1000);
         } finally {
             setIsLoading(false);
         }
