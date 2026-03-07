@@ -35,6 +35,7 @@ export default function ExitIntentPopup() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!email) return;
         setIsLoading(true);
 
         try {
@@ -47,16 +48,18 @@ export default function ExitIntentPopup() {
             setSubmitted(true);
             localStorage.setItem('realtyvoice_popup_optin', 'true');
 
-            // Redirect to blueprint access page after 1.5 seconds
+            // Reliable redirect to blueprint access page
+            console.log("Lead captured, redirecting...");
             setTimeout(() => {
-                router.push('/blueprint-access');
-                isVisible && setIsVisible(false);
+                window.location.href = '/blueprint-access';
             }, 1500);
+
         } catch (err) {
             console.error('Error saving lead:', err);
+            // Even on error, we want to redirect to provide value
             setSubmitted(true);
             setTimeout(() => {
-                router.push('/blueprint-access');
+                window.location.href = '/blueprint-access';
             }, 1000);
         } finally {
             setIsLoading(false);
