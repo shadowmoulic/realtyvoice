@@ -6,135 +6,177 @@ export default function Hero() {
             minHeight: '100vh',
             display: 'flex',
             alignItems: 'center',
-            paddingTop: '8rem',
+            paddingTop: '6rem',
             position: 'relative',
+            background: 'linear-gradient(to bottom, #0B0B12, #1A1333)',
             overflow: 'hidden'
         }}>
-            {/* Decorative Blur Orbs */}
+            {/* Ambient Violet Atmosphere */}
             <div style={{
                 position: 'absolute',
-                top: '20%',
-                left: '10%',
-                width: '300px',
-                height: '300px',
-                background: 'var(--primary)',
-                filter: 'blur(120px)',
-                opacity: 0.2,
-                zIndex: -1
-            }}></div>
-            <div style={{
-                position: 'absolute',
-                bottom: '20%',
-                right: '10%',
-                width: '400px',
-                height: '400px',
-                background: 'var(--secondary)',
-                filter: 'blur(150px)',
-                opacity: 0.15,
-                zIndex: -1
+                top: '0',
+                left: '0',
+                width: '100%',
+                height: '100%',
+                background: 'radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.05) 0%, transparent 70%)',
+                zIndex: 0
             }}></div>
 
-            <div className="container">
+            <div className="container" style={{ position: 'relative', zIndex: 1 }}>
                 <div className="grid-cols-2 hero-responsive">
                     <div className="fade-in">
-                        <div className="glass" style={{
-                            display: 'inline-block',
-                            padding: '0.4rem 1rem',
+                        <div style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.5rem',
+                            padding: '0.5rem 1rem',
+                            borderRadius: '2rem',
                             fontSize: '0.85rem',
                             fontWeight: 600,
-                            color: 'var(--primary-light)',
-                            marginBottom: '1.5rem',
-                            border: '1px solid rgba(167, 139, 250, 0.2)'
+                            color: 'var(--gold)',
+                            marginBottom: '2rem',
+                            marginTop: '2rem',
+                            background: 'rgba(212, 175, 55, 0.1)',
+                            border: '1px solid rgba(212, 175, 55, 0.2)'
                         }}>
-                            🚀 Only for Real Estate Professionals
+                            <span style={{ color: 'var(--gold)' }}>★</span>
+                            Only for High-Volume Real Estate Teams
                         </div>
 
-                        <h1 style={{ fontSize: '3.5rem', marginBottom: '1.5rem', lineHeight: 1.1 }}>
-                            Stop Losing <span className="text-gradient">High-Value</span> Leads to Missed Calls.
+                        <h1 style={{ fontSize: '4rem', marginBottom: '1.5rem', lineHeight: 1.1, fontWeight: 900, color: 'var(--text-primary)' }}>
+                            Never Miss Another <br />
+                            <span style={{ color: 'var(--gold)' }}>$20,000</span> Commission Call.
                         </h1>
 
-                        <p style={{ fontSize: '1.2rem', marginBottom: '2.5rem', maxWidth: '540px' }}>
-                            &ldquo;If you miss just one closing a year from missed calls, this pays for itself.&rdquo;
-                            AI answers instantly, qualifies the lead, and books the showing directly into your calendar.
+                        <p style={{ fontSize: '1.25rem', marginBottom: '2.5rem', maxWidth: '580px', color: 'var(--text-secondary)' }}>
+                            Turn missed calls into closed deals with an AI receptionist that qualifies leads and books showings while you&apos;re in the field.
                         </p>
 
-                        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '1.5rem' }} className="flex-center-mobile">
-                            <a href="https://cal.com/sayak-moulic/15min" className="btn btn-primary pulse" style={{ padding: '1rem 2.5rem', fontSize: '1.1rem' }}>
+                        <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', alignItems: 'center', marginBottom: '3rem' }} className="flex-center-mobile">
+                            <a href="https://cal.com/sayak-moulic/15min" className="btn btn-primary pulse" style={{
+                                padding: '1.1rem 2.8rem',
+                                fontSize: '1.1rem',
+                                background: 'var(--primary)',
+                                boxShadow: '0 0 40px rgba(124, 58, 237, 0.5), 0 0 15px rgba(212, 175, 55, 0.2)',
+                            }}>
                                 Start Your 7-Day Free Trial
                             </a>
+                            <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+                                No credit card required. <br />
+                                Cancel anytime.
+                            </div>
                         </div>
 
-                        <div className="glass" style={{ padding: '1rem', display: 'inline-block', border: '1px solid var(--primary-light)' }}>
-                            <p style={{ margin: 0, fontSize: '1rem', fontWeight: 600 }}>
-                                ☎️ Test it live! Call our front desk: <a href="tel:+16502524261" className="text-gradient">+1 (650) 252-4261</a>
-                            </p>
-                        </div>
-
-                        <div style={{ marginTop: '2.5rem', display: 'flex', alignItems: 'center', gap: '1rem', opacity: 0.7 }} className="flex-center-mobile">
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }} className="flex-center-mobile">
                             <div style={{ display: 'flex' }}>
                                 {[1, 2, 3, 4, 5].map(i => (
-                                    <span key={i} style={{ color: '#FCD34D' }}>★</span>
+                                    <span key={i} style={{ color: 'var(--gold)', fontSize: '1.2rem' }}>★</span>
                                 ))}
                             </div>
-                            <span style={{ fontSize: '0.9rem' }}>The #1 AI Answering Service for US Real Estate Agents.</span>
+                            <div style={{ fontSize: '1rem', color: 'var(--text-secondary)' }}>
+                                <strong style={{ color: 'var(--text-primary)' }}>Authority Grade AI</strong> &nbsp; Purpose-built for Realtors
+                            </div>
+                        </div>
+
+                        <div style={{ marginTop: '4rem' }}>
+                            <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '1rem' }}>Engineered to Outperform</p>
+                            <div style={{ display: 'flex', gap: '2.5rem', flexWrap: 'wrap', opacity: 0.6, filter: 'grayscale(1)' }} className="flex-center-mobile">
+                                <span style={{ fontWeight: 800, fontSize: '1.1rem' }}>RE/MAX STANDARDS</span>
+                                <span style={{ fontWeight: 800, fontSize: '1.1rem' }}>CENTURY 21 SPEED</span>
+                                <span style={{ fontWeight: 800, fontSize: '1.1rem' }}>KW SYSTEMS</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div className="glass fade-in" style={{
-                        padding: '2rem',
-                        position: 'relative',
-                        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
-                        border: '1px solid rgba(255, 255, 255, 0.1)',
-                        minHeight: '400px',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center'
-                    }}>
-                        {/* Visual Representation of the AI Chat/Voice */}
-                        <div style={{ marginBottom: '2rem' }}>
-                            <div className="glass" style={{
-                                padding: '1rem',
-                                marginBottom: '1rem',
-                                maxWidth: '80%',
-                                marginLeft: 'auto',
-                                background: 'rgba(109, 40, 217, 0.2)',
-                                borderBottomRightRadius: '0.2rem'
-                            }}>
-                                <p style={{ margin: 0, fontSize: '0.9rem', opacity: 1 }}>Hi, I saw your listing on Main St. Is it still available for a showing tomorrow at 2 PM?</p>
-                            </div>
-                            <div className="glass" style={{
-                                padding: '1rem',
-                                marginBottom: '1rem',
-                                maxWidth: '80%',
-                                background: 'rgba(30, 64, 175, 0.2)',
-                                borderBottomLeftRadius: '0.2rem'
-                            }}>
-                                <p style={{ margin: 0, fontSize: '0.9rem', opacity: 1 }}>Hi! I&apos;m RealtyVoice, answering for Sarah. Yes, it&apos;s available! To confirm, are you pre-approved or a cash buyer? </p>
-                            </div>
-                            <div className="glass" style={{
-                                padding: '1rem',
-                                marginBottom: '1rem',
-                                maxWidth: '80%',
-                                marginLeft: 'auto',
-                                background: 'rgba(109, 40, 217, 0.2)',
-                                borderBottomRightRadius: '0.2rem'
-                            }}>
-                                <p style={{ margin: 0, fontSize: '0.9rem', opacity: 1 }}>Pre-approved. Budget is $800k. </p>
-                            </div>
-                            <div className="glass" style={{
-                                padding: '1rem',
-                                maxWidth: '80%',
-                                background: 'rgba(30, 64, 175, 0.2)',
-                                borderBottomLeftRadius: '0.2rem',
-                                border: '1px solid var(--success)'
-                            }}>
-                                <p style={{ margin: 0, fontSize: '0.9rem', opacity: 1 }}>Perfect. I&apos;ve scheduled your showing for tomorrow at 2 PM. Sarah has been notified!</p>
+                    <div className="fade-in" style={{ position: 'relative' }}>
+                        <div className="glass" style={{
+                            padding: '2.5rem',
+                            position: 'relative',
+                            boxShadow: '0 40px 80px -20px rgba(0, 0, 0, 0.8)',
+                            background: 'rgba(20, 20, 28, 0.8)',
+                            border: '1px solid var(--glass-border)',
+                            borderRadius: '1.5rem',
+                            minHeight: '450px'
+                        }}>
+                            {/* Chat UI Visual */}
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                                <div style={{
+                                    alignSelf: 'flex-start',
+                                    padding: '1rem 1.2rem',
+                                    borderRadius: '1.2rem 1.2rem 1.2rem 0.2rem',
+                                    background: 'rgba(124, 58, 237, 0.15)',
+                                    border: '1px solid rgba(124, 58, 237, 0.3)',
+                                    maxWidth: '85%'
+                                }}>
+                                    <p style={{ margin: 0, fontSize: '0.95rem', color: 'var(--text-primary)', opacity: 1 }}>
+                                        Hi, is the property at 122 Elm St still available?
+                                    </p>
+                                </div>
+                                <div style={{
+                                    alignSelf: 'flex-end',
+                                    padding: '1rem 1.2rem',
+                                    borderRadius: '1.2rem 1.2rem 0.2rem 1.2rem',
+                                    background: 'var(--primary)',
+                                    maxWidth: '85%',
+                                    boxShadow: '0 10px 20px rgba(0,0,0,0.2)'
+                                }}>
+                                    <p style={{ margin: 0, fontSize: '0.95rem', color: 'white', opacity: 1 }}>
+                                        Hi! I&apos;m Sophia. Yes it is! Sarah is at a closing right now. Are you pre-approved or a cash buyer?
+                                    </p>
+                                </div>
+
+                                <div style={{
+                                    alignSelf: 'flex-start',
+                                    padding: '1rem 1.2rem',
+                                    borderRadius: '1.2rem 1.2rem 1.2rem 0.2rem',
+                                    background: 'rgba(124, 58, 237, 0.15)',
+                                    border: '1px solid rgba(124, 58, 237, 0.3)',
+                                    maxWidth: '85%'
+                                }}>
+                                    <p style={{ margin: 0, fontSize: '0.95rem', color: 'var(--text-primary)', opacity: 1 }}>
+                                        Pre-approved. Budget is $800k.
+                                    </p>
+                                </div>
+                                <div style={{
+                                    padding: '1.2rem',
+                                    borderRadius: '1rem',
+                                    background: 'rgba(212, 175, 55, 0.05)',
+                                    border: '1px solid var(--gold)',
+                                    textAlign: 'center',
+                                    marginTop: '1rem'
+                                }}>
+                                    <div style={{ color: 'var(--gold)', fontWeight: 700, fontSize: '1.1rem', marginBottom: '0.3rem' }}>
+                                        ✓ Showing Scheduled
+                                    </div>
+                                    <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--gold-soft)' }}>
+                                        Sarah has been notified. Check your calendar!
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
-                        <div style={{ textAlign: 'center' }}>
-                            <div className="text-gradient" style={{ fontWeight: 800, fontSize: '1.2rem' }}>
-                                Lead Captured & Qualified in 45 seconds.
+                        {/* Floaters - Realistic Stats */}
+                        <div className="glass" style={{
+                            position: 'absolute',
+                            bottom: '-2rem',
+                            right: '-1rem',
+                            padding: '1.2rem',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '1rem',
+                            animation: 'fadeInUp 1s ease 0.5s forwards',
+                            opacity: 0,
+                            zIndex: 2,
+                            background: 'var(--bg-card)',
+                            border: '1px solid var(--gold)',
+                            boxShadow: '0 0 20px rgba(212, 175, 55, 0.1)'
+                        }}>
+                            <div style={{ width: '40px', height: '40px', background: 'var(--primary)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
+                                📞
+                            </div>
+                            <div>
+                                <div style={{ fontWeight: 800, fontSize: '1.2rem', color: 'var(--text-primary)' }}>100%</div>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Call Capture Rate</div>
                             </div>
                         </div>
                     </div>

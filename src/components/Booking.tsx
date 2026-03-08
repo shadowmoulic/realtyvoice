@@ -25,12 +25,11 @@ export default function Booking() {
             }}></div>
 
             <div className="container" style={{ textAlign: 'center' }}>
-                <h2 className="text-gradient" style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>Start Your 7-Day Free Trial</h2>
-                <p style={{ maxWidth: '700px', margin: '0 auto 4rem', fontSize: '1.25rem' }}>
-                    See real conversations and booked appointments before you pay. Use the AI for outbound follow-ups too.
-                    <br /><br />
-                    <strong>No commitment. No setup fee.</strong> Just more deals.
+                <h2 style={{ fontSize: '3rem', fontWeight: 900, marginBottom: '2rem' }}>Start Your <span style={{ color: 'var(--gold)' }}>7-Day</span> Free Trial</h2>
+                <p style={{ maxWidth: '800px', margin: '0 auto 4rem', fontSize: '1.4rem', color: 'var(--text-secondary)' }}>
+                    Experience 100% call capture for 7 days. If you don&apos;t see the appointments appearing in your calendar, you pay nothing.
                 </p>
+
 
                 <div className="glass" style={{
                     maxWidth: '900px',

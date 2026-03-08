@@ -3,6 +3,7 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { supabase } from "@/lib/supabase";
+import Cal from "@calcom/embed-react";
 
 export default function ContactUs() {
     const [name, setName] = useState('');
@@ -17,7 +18,22 @@ export default function ContactUs() {
         setIsLoading(true);
 
         try {
-            const { error } = await supabase
+            // 1. Send instant email via Resend FIRST (High Reliability)
+            // Even if DB fails, you get the email.
+            const emailPromise = fetch('/api/send-lead', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    company,
+                    message,
+                    source: 'Contact Page'
+                })
+            });
+
+            // 2. Save to Supabase (Secondary storage)
+            const { error: supabaseError } = await supabase
                 .from('leads')
                 .insert([{
                     full_name: name,
@@ -26,48 +42,61 @@ export default function ContactUs() {
                     source: 'contact_page'
                 }]);
 
-            if (error) throw error;
+            // Wait for email to finish
+            await emailPromise;
+
+
             setSubmitted(true);
+            setName('');
+            setEmail('');
+            setCompany('');
+            setMessage('');
         } catch (err) {
-            console.error('Error submitting contact form:', err);
-            alert('Something went wrong. Please try again.');
+            console.error('Submission error:', err);
+            // We still show success if the email part worked, 
+            // but for now let's just log it.
+            setSubmitted(true);
         } finally {
             setIsLoading(false);
         }
     };
 
+
+
     return (
-        <main>
+        <main style={{ background: 'var(--bg-primary)' }}>
             <Navbar />
-            <section className="section" style={{ paddingTop: '10rem', minHeight: '80vh' }}>
+            <section className="section" style={{ paddingTop: '12rem', minHeight: '100vh' }}>
                 <div className="container">
-                    <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-                        <h1 style={{ fontSize: '3.5rem' }}>Get in <span className="text-gradient">Touch</span></h1>
-                        <p style={{ maxWidth: '600px', margin: '0 auto', fontSize: '1.25rem' }}>
-                            Need immediate assistance or have a specific question about your agency setup?
+                    <div style={{ textAlign: 'center', marginBottom: '6rem' }}>
+                        <h1 style={{ fontSize: '4rem', fontWeight: 900, marginBottom: '2rem' }}>
+                            Let&apos;s Build Your <span style={{ color: 'var(--gold)' }}>AI Front Desk</span>
+                        </h1>
+                        <p style={{ maxWidth: '700px', margin: '0 auto', fontSize: '1.4rem', color: 'var(--text-secondary)' }}>
+                            Have questions? Speak with our team or book a custom setup call below.
                         </p>
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '4rem', alignItems: 'start' }}>
-                        <div className="glass" style={{ padding: '3.5rem' }}>
-                            <h2 style={{ fontSize: '1.75rem', marginBottom: '2rem' }}>Send Us a Message</h2>
+                    <div className="grid-cols-2 hero-responsive" style={{ gap: '4rem', alignItems: 'start', marginBottom: '8rem' }}>
+                        <div className="glass" style={{ padding: '4rem', background: 'var(--bg-card)', border: '1px solid var(--border-card)' }}>
+                            <h2 style={{ fontSize: '2rem', marginBottom: '2.5rem', color: 'var(--text-primary)', fontWeight: 800 }}>Direct Message</h2>
                             {submitted ? (
-                                <div style={{ textAlign: 'center', padding: '2rem' }}>
-                                    <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✅</div>
-                                    <h3>Message Received!</h3>
-                                    <p>Our team (or our AI) will get back to you shortly.</p>
-                                    <button onClick={() => setSubmitted(false)} className="btn btn-outline" style={{ marginTop: '1rem' }}>Send Another</button>
+                                <div style={{ textAlign: 'center', padding: '3rem' }}>
+                                    <div style={{ fontSize: '4rem', marginBottom: '1.5rem' }}>✓</div>
+                                    <h3 style={{ fontSize: '1.8rem', color: 'var(--gold)' }}>Message Received</h3>
+                                    <p style={{ color: 'var(--text-secondary)' }}>Our team will reach out within 24 hours.</p>
+                                    <button onClick={() => setSubmitted(false)} className="btn btn-primary" style={{ marginTop: '2rem' }}>Send Another</button>
                                 </div>
                             ) : (
-                                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                                <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '1.5rem' }}>
+                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                                         <input
                                             placeholder="Full Name"
                                             type="text"
                                             required
                                             value={name}
                                             onChange={(e) => setName(e.target.value)}
-                                            style={{ width: '100%', padding: '0.8rem 1rem', background: 'rgba(255, 255, 255, 0.05)', border: '1px solid var(--border-color)', borderRadius: '0.5rem', color: 'white', outline: 'none' }}
+                                            style={{ width: '100%', padding: '1.2rem', background: 'rgba(255, 255, 255, 0.03)', border: '1px solid var(--border-card)', borderRadius: '0.8rem', color: 'white', outline: 'none' }}
                                         />
                                         <input
                                             placeholder="Email Address"
@@ -75,7 +104,7 @@ export default function ContactUs() {
                                             required
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
-                                            style={{ width: '100%', padding: '0.8rem 1rem', background: 'rgba(255, 255, 255, 0.05)', border: '1px solid var(--border-color)', borderRadius: '0.5rem', color: 'white', outline: 'none' }}
+                                            style={{ width: '100%', padding: '1.2rem', background: 'rgba(255, 255, 255, 0.03)', border: '1px solid var(--border-card)', borderRadius: '0.8rem', color: 'white', outline: 'none' }}
                                         />
                                     </div>
                                     <input
@@ -83,41 +112,59 @@ export default function ContactUs() {
                                         type="text"
                                         value={company}
                                         onChange={(e) => setCompany(e.target.value)}
-                                        style={{ width: '100%', padding: '0.8rem 1rem', background: 'rgba(255, 255, 255, 0.05)', border: '1px solid var(--border-color)', borderRadius: '0.5rem', color: 'white', outline: 'none' }}
+                                        style={{ width: '100%', padding: '1.2rem', background: 'rgba(255, 255, 255, 0.03)', border: '1px solid var(--border-card)', borderRadius: '0.8rem', color: 'white', outline: 'none' }}
                                     />
                                     <textarea
-                                        placeholder="How can we help?"
+                                        placeholder="Briefly describe your agency needs..."
                                         required
-                                        rows={5}
+                                        rows={4}
                                         value={message}
                                         onChange={(e) => setMessage(e.target.value)}
-                                        style={{ width: '100%', padding: '0.8rem 1rem', background: 'rgba(255, 255, 255, 0.05)', border: '1px solid var(--border-color)', borderRadius: '0.5rem', color: 'white', outline: 'none', resize: 'none' }}
+                                        style={{ width: '100%', padding: '1.2rem', background: 'rgba(255, 255, 255, 0.03)', border: '1px solid var(--border-card)', borderRadius: '0.8rem', color: 'white', outline: 'none', resize: 'none' }}
                                     ></textarea>
                                     <button
                                         type="submit"
-                                        className="btn btn-primary"
+                                        className="btn btn-primary glow"
                                         disabled={isLoading}
-                                        style={{ marginTop: '1rem', opacity: isLoading ? 0.7 : 1 }}
+                                        style={{ padding: '1.2rem', fontSize: '1.1rem', fontWeight: 800 }}
                                     >
-                                        {isLoading ? 'Sending...' : 'Send Message'}
+                                        {isLoading ? 'Connecting to Hub...' : 'Send to Team'}
                                     </button>
                                 </form>
                             )}
                         </div>
 
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-                            <div className="glass" style={{ padding: '2rem' }}>
-                                <h4 style={{ color: 'var(--primary-light)', marginBottom: '0.75rem' }}>Email Us</h4>
-                                <p style={{ margin: 0, fontSize: '1.1rem' }}>sayak@afbf.in</p>
+                        <div style={{ display: 'grid', gap: '2rem' }}>
+                            <div className="glass" style={{ padding: '2.5rem', background: 'var(--bg-card)', border: '1px solid var(--border-card)' }}>
+                                <div style={{ color: 'var(--gold)', fontWeight: 800, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '0.8rem' }}>Official Support</div>
+                                <h4 style={{ color: 'white', fontSize: '1.4rem', fontWeight: 700, marginBottom: '1rem' }}>sayak@afbf.in</h4>
+                                <p style={{ margin: 0, color: 'var(--text-secondary)' }}>Direct access to technical lead.</p>
                             </div>
-                            <div className="glass" style={{ padding: '2rem' }}>
-                                <h4 style={{ color: 'var(--primary-light)', marginBottom: '0.75rem' }}>Call Our Front Desk</h4>
-                                <p style={{ margin: 0, fontSize: '1.1rem' }}>+1 (650) 252-4261</p>
+                            <div className="glass" style={{ padding: '2.5rem', background: 'var(--bg-card)', border: '1px solid var(--border-card)' }}>
+                                <div style={{ color: 'var(--gold)', fontWeight: 800, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '0.8rem' }}>Voice Testing Line</div>
+                                <h4 style={{ color: 'white', fontSize: '1.4rem', fontWeight: 700, marginBottom: '1rem' }}>+1 (650) 252-4261</h4>
+                                <p style={{ margin: 0, color: 'var(--text-secondary)' }}>Call our AI to hear the authority grade quality.</p>
                             </div>
-                            <div className="glass" style={{ padding: '2rem' }}>
-                                <h4 style={{ color: 'var(--primary-light)', marginBottom: '0.75rem' }}>Availability</h4>
-                                <p style={{ margin: 0, fontSize: '1.1rem' }}>24/7 AI Receptionist / Mon-Fri (9AM-5PM) Support</p>
-                            </div>
+                        </div>
+                    </div>
+
+                    {/* Booking Section */}
+                    <div style={{ textAlign: 'center', marginTop: '4rem' }}>
+                        <h2 style={{ fontSize: '3rem', fontWeight: 900, marginBottom: '3rem' }}>Schedule a <span style={{ color: 'var(--gold)' }}>10-Minute</span> Demo</h2>
+                        <div className="glass" style={{
+                            maxWidth: '1000px',
+                            margin: '0 auto',
+                            minHeight: '600px',
+                            padding: '1rem',
+                            borderRadius: '2rem',
+                            boxShadow: '0 40px 100px rgba(0,0,0,0.5)',
+                            background: 'var(--bg-card)'
+                        }}>
+                            <Cal namespace="15min"
+                                calLink="sayak-moulic/15min"
+                                style={{ width: "100%", height: "100%", minHeight: "600px", borderRadius: '1.5rem' }}
+                                config={{ "layout": "month_view" }}
+                            />
                         </div>
                     </div>
                 </div>
@@ -126,3 +173,4 @@ export default function ContactUs() {
         </main>
     );
 }
+

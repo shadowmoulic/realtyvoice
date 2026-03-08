@@ -20,12 +20,25 @@ CREATE TABLE IF NOT EXISTS public.leads (
     created_at TIMESTAMPTZ DEFAULT now()
 );
 
--- 3. Enable Row Level Security (RLS)
+-- 3. Create Testimonials Table
+CREATE TABLE IF NOT EXISTS public.testimonials (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    name TEXT NOT NULL,
+    role TEXT,
+    content TEXT NOT NULL,
+    rating INTEGER DEFAULT 5,
+    location TEXT,
+    created_at TIMESTAMPTZ DEFAULT now(),
+    is_approved BOOLEAN DEFAULT false
+);
+
+-- 4. Enable Row Level Security (RLS)
 ALTER TABLE public.blogs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.leads ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.testimonials ENABLE ROW LEVEL SECURITY;
 
--- 4. Create Policies
--- Blogs: Public read, and public CRUD (restricted by your app password for now)
+-- 5. Create Policies
+-- Blogs: Public read, and public CRUD
 CREATE POLICY "Public Read Access for Blogs" ON public.blogs FOR SELECT USING (true);
 CREATE POLICY "Public CRUD for Blogs" ON public.blogs FOR ALL USING (true);
 
@@ -33,6 +46,11 @@ CREATE POLICY "Public CRUD for Blogs" ON public.blogs FOR ALL USING (true);
 CREATE POLICY "Public Insert Access for Leads" ON public.leads FOR INSERT WITH CHECK (true);
 CREATE POLICY "Admin Read Access for Leads" ON public.leads TO authenticated USING (true);
 
+-- Testimonials: Public read approved, public insert
+CREATE POLICY "Public Read Approved Testimonials" ON public.testimonials FOR SELECT USING (is_approved = true);
+CREATE POLICY "Public Insert Testimonials" ON public.testimonials FOR INSERT WITH CHECK (true);
+
 -- Indexes for performance
 CREATE INDEX idx_blogs_slug ON public.blogs(slug);
 CREATE INDEX idx_leads_email ON public.leads(email);
+CREATE INDEX idx_testimonials_approved ON public.testimonials(is_approved);

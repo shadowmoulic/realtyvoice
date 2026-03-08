@@ -3,8 +3,8 @@ import Link from 'next/link';
 export default function Footer() {
     return (
         <footer className="section" style={{
-            background: 'rgba(5, 10, 20, 0.8)',
-            borderTop: '1px solid var(--border-color)',
+            background: 'var(--bg-secondary)',
+            borderTop: '1px solid var(--border-card)',
             paddingTop: '6rem',
             paddingBottom: '3rem'
         }}>
@@ -12,37 +12,44 @@ export default function Footer() {
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '4rem', marginBottom: '4rem' }}>
                     <div>
                         <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'white', display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.5rem' }}>
-                            <span className="text-gradient">Realty</span>Voice
+                            <span style={{ color: 'var(--gold)' }}>Realty</span>Voice
                         </h3>
-                        <p style={{ fontSize: '0.9rem', opacity: 0.7 }}>
-                            Never miss a lead again. RealtyVoice AI answers your missed calls, qualifies leads, and books showings 24/7.
+                        <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+                            Never miss another $20,000 commission call. RealtyVoice AI answers your missed calls, qualifies leads, and books showings 24/7.
                         </p>
                     </div>
 
                     <div>
-                        <h4 style={{ color: 'white', marginBottom: '1.5rem', fontSize: '1rem' }}>Product</h4>
+                        <h4 style={{ color: 'white', marginBottom: '1.5rem', fontSize: '1rem', fontWeight: 700 }}>Solutions</h4>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-                            <Link href="/" style={{ fontSize: '0.9rem', opacity: 0.7 }}>Home</Link>
-                            <Link href="/how-it-works" style={{ fontSize: '0.9rem', opacity: 0.7 }}>How it Works</Link>
-                            <Link href="/demo" style={{ fontSize: '0.9rem', opacity: 0.7 }}>Demo Hub</Link>
-                            <Link href="/about" style={{ fontSize: '0.9rem', opacity: 0.7 }}>About Us</Link>
-                            <Link href="https://cal.com/sayak-moulic/15min" style={{ fontSize: '0.9rem', opacity: 0.7 }}>7-Day Trial</Link>
+                            <Link href="/" style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Home</Link>
+                            <Link href="/how-it-works" style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>The Blueprint</Link>
+                            <Link href="/pricing" style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Investment ROI</Link>
+                            <Link href="/testimonials" style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Social Proof</Link>
+                            <Link href="/about" style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Our Why</Link>
                         </div>
                     </div>
 
                     <div>
-                        <h4 style={{ color: 'white', marginBottom: '1.5rem', fontSize: '1rem' }}>Contact & Support</h4>
+                        <h4 style={{ color: 'white', marginBottom: '1.5rem', fontSize: '1rem', fontWeight: 700 }}>Contact & Support</h4>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-                            <p style={{ marginBottom: 0, fontSize: '0.9rem', opacity: 0.7 }}>Email: <a href="mailto:sayak@afbf.in" className="text-gradient">sayak@afbf.in</a></p>
-                            <p style={{ marginBottom: 0, fontSize: '0.9rem', opacity: 0.7 }}>Direct: <a href="tel:+16502524261" className="text-gradient">+1 (650) 252-4261</a></p>
+                            <p style={{ marginBottom: 0, fontSize: '0.9rem', color: 'var(--text-muted)' }}>Email: <a href="mailto:sayak@afbf.in" style={{ color: 'white' }}>sayak@afbf.in</a></p>
+                            <p style={{ marginBottom: 0, fontSize: '0.9rem', color: 'var(--text-muted)' }}>Direct: <a href="tel:+16502524261" style={{ color: 'white' }}>+1 (650) 252-4261</a></p>
+                            <div style={{ marginTop: '1rem' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--gold)' }}>★ ★ ★ ★ ★</div>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Exclusively for High-Volume US Teams</div>
+                            </div>
                         </div>
                     </div>
+
+
                 </div>
 
-                <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '2.5rem', textAlign: 'center', opacity: 0.5, fontSize: '0.8rem' }}>
-                    © {new Date().getFullYear()} RealtyVoice. Built by Agents, For Agents. US Market Only.
+                <div style={{ borderTop: '1px solid var(--border-card)', paddingTop: '2.5rem', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.8rem' }}>
+                    © {new Date().getFullYear()} RealtyVoice. Built by Agents, For Agents in US & Texas Markets.
                 </div>
             </div>
         </footer>
     );
 }
+

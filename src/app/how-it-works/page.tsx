@@ -5,48 +5,141 @@ import Footer from "@/components/Footer";
 export default function HowItWorks() {
     const steps = [
         {
-            title: "1. Connect",
-            desc: "We plug our AI directly into your professional phone number. No complex setup or new numbers required."
+            title: "10-Min Discovery",
+            desc: "We hop on a quick call to understand your business, your tone, and your specific listings.",
+            icon: "📞"
         },
         {
-            title: "2. Customize",
-            desc: "The AI is trained on your brand, your standard answers, and your specific service area."
+            title: "Custom AI Agent",
+            desc: "We build a bespoke AI voice agent trained specifically on your brand and service area.",
+            icon: "🧠"
         },
         {
-            title: "3. Go Live",
-            desc: "Instantly start capturing leads you were previously missing. The AI works 24/7, year-round."
+            title: "No-Cost Number",
+            desc: "We provide a dedicated number at no extra cost. Simply forward your missed calls to it.",
+            icon: "☎️"
         },
         {
-            title: "4. Book Showings",
-            desc: "Serious prospects are booked directly into your calendar. You&apos;ll receive instant notifications via SMS & email."
+            title: "Seamless Flow",
+            desc: "Connected to Cal.com for events and Google Sheets for a simple, straightforward CRM.",
+            icon: "⚙️"
+        },
+        {
+            title: "7-Day Trial",
+            desc: "Work with us for 7 days. If you don't love the results, you ditch us. No hard feelings.",
+            icon: "🎁"
+        },
+        {
+            title: "Scale Faster",
+            desc: "Never miss a lead again. Focus on closings while your AI handles the first touch.",
+            icon: "🚀"
         }
     ];
 
     return (
-        <main>
+        <main style={{ background: 'var(--bg-primary)' }}>
             <Navbar />
-            <section className="section" style={{ paddingTop: '10rem', minHeight: '80vh' }}>
+            <section className="section" style={{
+                paddingTop: '12rem',
+                minHeight: '100vh',
+                background: 'radial-gradient(circle at 50% 10%, rgba(124, 58, 237, 0.08) 0%, transparent 50%)'
+            }}>
                 <div className="container">
-                    <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-                        <h1 style={{ fontSize: '3.5rem' }}>How It <span className="text-gradient">Works</span></h1>
-                        <p style={{ maxWidth: '600px', margin: '0 auto', fontSize: '1.25rem' }}>
-                            Setting up RealtyVoice is faster than answering a single missed call.
+                    <div style={{ textAlign: 'center', marginBottom: '6rem' }}>
+                        <div style={{
+                            color: 'var(--gold)',
+                            fontWeight: 700,
+                            letterSpacing: '2px',
+                            textTransform: 'uppercase',
+                            fontSize: '0.9rem',
+                            marginBottom: '1.5rem'
+                        }}>The Blueprint</div>
+                        <h1 style={{ fontSize: '4rem', fontWeight: 800, marginBottom: '2rem' }}>
+                            How It <span style={{ color: 'var(--gold)' }}>Works</span>
+                        </h1>
+                        <p style={{ maxWidth: '700px', margin: '0 auto', fontSize: '1.4rem', color: 'var(--text-secondary)' }}>
+                            We take the complexity out of AI so you can focus on building relationships and closing deals.
                         </p>
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2.5rem' }}>
-                        {steps.map((step, i) => (
-                            <div key={i} className="glass" style={{ padding: '3rem', borderTop: i % 2 === 0 ? '4px solid var(--primary-light)' : '4px solid var(--accent)' }}>
-                                <h3 style={{ fontSize: '1.75rem', marginBottom: '1.25rem' }}>{step.title}</h3>
-                                <p style={{ margin: 0, fontSize: '1.1rem' }}>{step.desc}</p>
-                            </div>
-                        ))}
+                    <div style={{ position: 'relative' }}>
+                        <div style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+                            gap: '2.5rem',
+                            position: 'relative',
+                            zIndex: 1
+                        }}>
+                            {steps.map((step, i) => (
+                                <div key={i} className="glass" style={{
+                                    padding: '3.5rem',
+                                    border: '1px solid var(--border-card)',
+                                    borderRadius: '1.5rem',
+                                    background: 'var(--bg-card)',
+                                    transition: 'all 0.3s ease',
+                                    position: 'relative',
+                                    overflow: 'hidden'
+                                }}>
+                                    <div style={{
+                                        position: 'absolute',
+                                        top: '1.5rem',
+                                        right: '2rem',
+                                        fontSize: '3rem',
+                                        opacity: 0.1,
+                                        fontWeight: 900,
+                                        color: 'var(--gold)'
+                                    }}>0{i + 1}</div>
+                                    <div style={{
+                                        fontSize: '2.5rem',
+                                        marginBottom: '2rem',
+                                        background: 'rgba(124, 58, 237, 0.1)',
+                                        width: '70px',
+                                        height: '70px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        borderRadius: '50%',
+                                        border: '1px solid rgba(124, 58, 237, 0.2)'
+                                    }}>{step.icon}</div>
+                                    <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', fontWeight: 700, color: 'var(--text-primary)' }}>{step.title}</h3>
+                                    <p style={{ margin: 0, fontSize: '1.15rem', lineHeight: 1.7, color: 'var(--text-secondary)' }}>{step.desc}</p>
+
+                                    {/* Guiding Arrow for Desktop */}
+                                    {i < steps.length - 1 && (
+                                        <div className="desktop-only" style={{
+                                            position: 'absolute',
+                                            right: '-1.25rem',
+                                            top: '50%',
+                                            transform: 'translateY(-50%)',
+                                            zIndex: 2,
+                                            color: 'var(--gold)',
+                                            fontSize: '1.5rem',
+                                            opacity: 0.5
+                                        }}>
+                                            →
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
                     </div>
 
-                    <div style={{ marginTop: '5rem', textAlign: 'center' }}>
-                        <a href="https://cal.com/sayak-moulic/15min" className="btn btn-primary" style={{ padding: '1.2rem 3rem', fontSize: '1.2rem' }}>
-                            Book Your Setup Call ☎️
-                        </a>
+
+                    <div style={{ marginTop: '8rem', textAlign: 'center' }}>
+                        <div className="glass" style={{
+                            padding: '4rem',
+                            border: '1px solid var(--primary-soft)',
+                            background: 'linear-gradient(135deg, rgba(20, 20, 28, 0.9), rgba(26, 26, 36, 0.9))',
+                            borderRadius: '2rem'
+                        }}>
+                            <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem' }}>Ready to automate your front desk?</h2>
+                            <p style={{ marginBottom: '3rem', fontSize: '1.2rem', color: 'var(--text-secondary)' }}>
+                                Book your 10-minute discovery call today. No obligation, just value.
+                            </p>
+                            <a href="https://cal.com/sayak-moulic/15min" className="btn btn-primary" style={{ padding: '1.2rem 4rem', fontSize: '1.3rem' }}>
+                                Book Your Discovery Call
+                            </a>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -54,3 +147,4 @@ export default function HowItWorks() {
         </main>
     );
 }
+
