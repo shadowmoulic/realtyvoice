@@ -5,7 +5,7 @@ import Cal from "@calcom/embed-react";
 
 export default function Pricing() {
     return (
-        <main style={{ background: 'var(--bg-primary)' }}>
+        <main style={{ background: 'var(--bg-primary)' }} suppressHydrationWarning={true}>
             <Navbar />
             <section className="section" style={{
                 paddingTop: '12rem',
@@ -27,7 +27,7 @@ export default function Pricing() {
                             textTransform: 'uppercase',
                             letterSpacing: '2px'
                         }}>Internal Revenue Analysis</div>
-                        <h1 style={{ fontSize: '4rem', fontWeight: 900, marginBottom: '2rem', color: 'var(--text-primary)' }}>
+                        <h1 style={{ fontWeight: 900, marginBottom: '2rem', color: 'var(--text-primary)' }}>
                             The ROI of <span style={{ color: 'var(--gold)' }}>Never Missing</span> a Call
                         </h1>
                         <p style={{ maxWidth: '800px', margin: '0 auto', fontSize: '1.4rem', color: 'var(--text-secondary)' }}>
@@ -36,9 +36,10 @@ export default function Pricing() {
                     </div>
 
                     <div className="grid-cols-2 hero-responsive" style={{ gap: '4rem', alignItems: 'stretch' }}>
-                        {/* Human Receptionist Cost */}
-                        <div className="glass" style={{ padding: '4rem', background: 'rgba(255,255,255,0.02)', border: '1px solid var(--border-card)' }}>
-                            <h2 style={{ fontSize: '2.5rem', marginBottom: '2rem', color: 'var(--text-primary)', fontWeight: 800 }}>Traditional Team</h2>
+                        {/* Traditional Team */}
+                        <div className="glass pricing-card" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid var(--border-card)' }}>
+                            <h2 style={{ fontSize: '2.2rem', marginBottom: '2rem', color: 'var(--text-primary)', fontWeight: 800 }}>Traditional Team</h2>
+                            {/* ... same content ... */}
                             <div style={{ marginBottom: '3rem' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.5rem', paddingBottom: '1rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                                     <span>Average Salary</span>
@@ -66,14 +67,13 @@ export default function Pricing() {
                         </div>
 
                         {/* RealtyVoice AI */}
-                        <div className="glass" style={{
-                            padding: '4rem',
+                        <div className="glass pricing-card" style={{
                             background: 'var(--bg-card)',
                             border: '2px solid var(--gold)',
                             position: 'relative',
                             boxShadow: '0 0 60px rgba(212, 175, 55, 0.1)'
                         }}>
-                            <div style={{
+                            <div className="authority-badge" style={{
                                 position: 'absolute',
                                 top: '-1.5rem',
                                 left: '50%',
@@ -84,13 +84,14 @@ export default function Pricing() {
                                 borderRadius: '2rem',
                                 fontWeight: 900,
                                 fontSize: '0.9rem',
-                                boxShadow: '0 10px 20px rgba(212,175,55,0.3)'
+                                boxShadow: '0 10px 20px rgba(212,175,55,0.3)',
+                                whiteSpace: 'nowrap'
                             }}>HIGH AUTHORITY</div>
 
-                            <h2 style={{ fontSize: '2.5rem', marginBottom: '2rem', color: 'var(--gold)', fontWeight: 800 }}>RealtyVoice AI</h2>
+                            <h2 style={{ fontSize: '2.2rem', marginBottom: '2rem', color: 'var(--gold)', fontWeight: 800 }}>RealtyVoice AI</h2>
                             <div style={{ marginBottom: '3rem' }}>
-                                <div style={{ fontSize: '4.5rem', fontWeight: 900, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
-                                    <span style={{ fontSize: '2rem', verticalAlign: 'top', marginRight: '0.5rem', color: 'var(--gold)' }}>$</span>
+                                <div className="price-tag" style={{ fontWeight: 900, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
+                                    <span style={{ verticalAlign: 'top', marginRight: '0.5rem', color: 'var(--gold)' }}>$</span>
                                     Fractional
                                 </div>
                                 <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem' }}>of the cost of a single bad hire.</p>
@@ -125,14 +126,14 @@ export default function Pricing() {
 
                     <div style={{ marginTop: '8rem', textAlign: 'center' }}>
                         <h3 style={{ fontSize: '2.5rem', marginBottom: '4rem', color: 'var(--text-primary)', fontWeight: 800 }}>If you miss just <span style={{ color: 'var(--gold)' }}>ONE</span> closing a year...</h3>
-                        <div style={{ display: 'flex', justifyContent: 'center', gap: '4rem', flexWrap: 'wrap', alignItems: 'center' }}>
-                            <div className="glass" style={{ padding: '2.5rem 5rem' }}>
-                                <div style={{ fontSize: '3.5rem', fontWeight: 900, color: '#EF4444' }}>$20,000+</div>
+                        <div style={{ display: 'flex', justifyContent: 'center', gap: '3rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                            <div className="glass pricing-card" style={{ padding: '2.5rem 5rem' }}>
+                                <div style={{ fontSize: '3rem', fontWeight: 900, color: '#EF4444' }}>$20,000+</div>
                                 <div style={{ color: 'var(--text-muted)', fontWeight: 500 }}>LOST COMMISSION</div>
                             </div>
-                            <div style={{ fontSize: '4rem', alignSelf: 'center', color: 'var(--text-muted)' }}>vs</div>
-                            <div className="glass" style={{ padding: '2.5rem 5rem', border: '1px solid var(--gold)' }}>
-                                <div style={{ fontSize: '3.5rem', fontWeight: 900, color: 'var(--gold)' }}>Fractional</div>
+                            <div className="roi-vs" style={{ fontSize: '4rem', alignSelf: 'center', color: 'var(--text-muted)' }}>vs</div>
+                            <div className="glass pricing-card" style={{ padding: '2.5rem 5rem', border: '1px solid var(--gold)' }}>
+                                <div style={{ fontSize: '3rem', fontWeight: 900, color: 'var(--gold)' }}>Fractional</div>
                                 <div style={{ color: 'var(--text-muted)', fontWeight: 500 }}>AI INVESTMENT</div>
                             </div>
                         </div>

@@ -113,12 +113,12 @@ export default function Testimonials() {
 
 
     return (
-        <main style={{ background: 'var(--bg-primary)' }}>
+        <main style={{ background: 'var(--bg-primary)' }} suppressHydrationWarning={true}>
             <Navbar />
             <section className="section" style={{ paddingTop: '12rem', minHeight: '100vh' }}>
                 <div className="container">
                     <div style={{ textAlign: 'center', marginBottom: '6rem' }}>
-                        <h1 style={{ fontSize: '4rem', fontWeight: 900, marginBottom: '2rem', color: 'var(--text-primary)' }}>
+                        <h1 style={{ fontWeight: 900, marginBottom: '2rem', color: 'var(--text-primary)' }}>
                             Trusted by <span style={{ color: 'var(--gold)' }}>Active Agents</span>
                         </h1>
                         <p style={{ maxWidth: '750px', margin: '0 auto', fontSize: '1.4rem', color: 'var(--text-secondary)' }}>
@@ -127,12 +127,10 @@ export default function Testimonials() {
 
                     </div>
 
-                    {/* Masonry-like Grid */}
-                    <div style={{
+                    <div className="testimonials-grid" style={{
                         columnCount: 3,
                         columnGap: '2rem',
-                        breakInside: 'avoid'
-                    }} className="testimonials-grid">
+                    }}>
                         {[...featuredTestimonials, ...testimonials].map((t, i) => (
                             <div key={i} className="glass" style={{
                                 padding: '2.5rem',
@@ -183,7 +181,7 @@ export default function Testimonials() {
                             </p>
 
                             <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '1.5rem' }}>
-                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                                <div className="form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                                     <input
                                         type="text"
                                         placeholder="Full Name"
@@ -236,17 +234,27 @@ export default function Testimonials() {
                         </div>
                     </div>
                 </div>
-            </section>
 
-            <style jsx>{`
-                @media (max-width: 992px) {
-                    .testimonials-grid { column-count: 2 !important; }
-                }
-                @media (max-width: 600px) {
-                    .testimonials-grid { column-count: 1 !important; }
-                    input { grid-template-columns: 1fr !important; }
-                }
-            `}</style>
+                {/* Final Call to Action */}
+                <div style={{ marginTop: '10rem', textAlign: 'center' }}>
+                    <div className="glass" style={{
+                        padding: '5rem 2rem',
+                        borderRadius: '3rem',
+                        border: '1px solid var(--gold)',
+                        background: 'linear-gradient(135deg, rgba(11, 11, 18, 0.95), rgba(26, 26, 36, 0.95))',
+                        maxWidth: '900px',
+                        margin: '0 auto'
+                    }}>
+                        <h2 style={{ fontSize: '3rem', fontWeight: 900, marginBottom: '1.5rem' }}>Ready to Capture Every Lead?</h2>
+                        <p style={{ fontSize: '1.3rem', color: 'var(--text-secondary)', marginBottom: '3rem', maxWidth: '600px', margin: '0 auto 3rem' }}>
+                            Join the agents who have stopped leaking commissions. Book your free custom AI setup and see the difference.
+                        </p>
+                        <a href="https://cal.com/sayak-moulic/15min" className="btn btn-primary glow" style={{ padding: '1.5rem 4rem', fontSize: '1.25rem' }}>
+                            Book Your Free Slot Now
+                        </a>
+                    </div>
+                </div>
+            </section>
 
             <Footer />
         </main>

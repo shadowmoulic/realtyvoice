@@ -64,7 +64,7 @@ export default function ContactUs() {
 
 
     return (
-        <main style={{ background: 'var(--bg-primary)' }}>
+        <main style={{ background: 'var(--bg-primary)' }} suppressHydrationWarning={true}>
             <Navbar />
             <section className="section" style={{ paddingTop: '12rem', minHeight: '100vh' }}>
                 <div className="container">

@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 
 export default function About() {
     return (
-        <main style={{ background: 'var(--bg-primary)' }}>
+        <main style={{ background: 'var(--bg-primary)' }} suppressHydrationWarning={true}>
             <Navbar />
             <section className="section" style={{ paddingTop: '12rem', minHeight: '100vh' }}>
                 <div className="container">
@@ -53,6 +53,16 @@ export default function About() {
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div style={{ marginTop: '8rem', textAlign: 'center' }}>
+                    <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', fontWeight: 900 }}>Curious how we can help your team?</h2>
+                    <p style={{ maxWidth: '600px', margin: '0 auto 3rem', fontSize: '1.25rem', color: 'var(--text-secondary)' }}>
+                        Book a 10-minute strategy call and we&apos;ll build you a custom AI receptionist prototype on the spot.
+                    </p>
+                    <a href="https://cal.com/sayak-moulic/15min" className="btn btn-primary pulse" style={{ padding: '1.2rem 3.5rem', fontSize: '1.15rem' }}>
+                        Book Your Free Strategy Slot
+                    </a>
                 </div>
             </section>
             <Footer />

@@ -70,6 +70,34 @@ h6 {
   line-height: 1.2;
 }
 
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem !important;
+  }
+
+  h2 {
+    font-size: 2rem !important;
+  }
+
+  h3 {
+    font-size: 1.75rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2.2rem !important;
+  }
+
+  h2 {
+    font-size: 1.8rem !important;
+  }
+
+  h3 {
+    font-size: 1.5rem !important;
+  }
+}
+
 p {
   line-height: 1.6;
   color: var(--text-secondary);
@@ -79,6 +107,13 @@ p {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.25rem;
+  }
 }
 
 .btn {
@@ -142,13 +177,21 @@ p {
   top: 1rem;
   left: 50%;
   transform: translateX(-50%);
-  width: 90%;
+  width: 95%;
   max-width: 1200px;
-  z-index: 1000;
-  padding: 0.75rem 2rem;
+  z-index: 3000;
+  padding: 0.75rem 1.5rem;
   display: flex !important;
   justify-content: space-between;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .nav-fixed {
+    top: 0.5rem;
+    width: 98%;
+    padding: 0.5rem 1rem;
+  }
 }
 
 .grid-cols-2 {
@@ -210,8 +253,34 @@ p {
   display: block;
 }
 
-.flex-center-mobile {
-  display: flex;
+.hero-title {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  margin-bottom: 2.5rem;
+  max-width: 580px;
+}
+
+@media (max-width: 992px) {
+  .hero-title {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
 }
 
 @media (max-width: 992px) {
@@ -230,23 +299,158 @@ p {
 }
 
 @media (max-width: 768px) {
-  .container {
-    padding: 0 1.5rem;
-  }
-
   .section {
-    padding: 4rem 0;
+    padding: 3.5rem 0;
   }
 
-  .nav-links {
+  .nav-links-desktop {
     display: none !important;
   }
 
-  .desktop-only {
-    display: none;
+  .grid-cols-2,
+  .grid-cols-3,
+  .features-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem;
+  }
+}
+
+/* Page Specific Responsive Adjustments */
+.testimonials-grid {
+  column-count: 3;
+  column-gap: 2rem;
+}
+
+.pricing-card {
+  padding: 4rem;
+}
+
+.price-tag {
+  font-size: 4.5rem;
+}
+
+.step-card {
+  padding: 3.5rem;
+}
+
+@media (max-width: 992px) {
+  .testimonials-grid {
+    column-count: 2 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .testimonials-grid {
+    column-count: 1 !important;
   }
 
-  .grid-cols-3 {
+  .pricing-card {
+    padding: 2.5rem 1.5rem !important;
+  }
+
+  .price-tag {
+    font-size: 3rem !important;
+  }
+
+  .roi-vs {
+    font-size: 2rem !important;
+    margin: 1rem 0 !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  .authority-badge {
+    top: -1rem !important;
+    padding: 0.4rem 1.5rem !important;
+    font-size: 0.8rem !important;
+  }
+
+  .step-card {
+    padding: 2.5rem 1.75rem !important;
+  }
+
+  .step-card h3 {
+    font-size: 1.5rem !important;
+  }
+
+  .form-row {
     grid-template-columns: 1fr !important;
   }
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(11, 11, 18, 0.98);
+  backdrop-filter: blur(10px);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  transition: all 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mobile-menu-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.mobile-nav-link {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  transition: color 0.2s;
+}
+
+.mobile-nav-link:hover {
+  color: var(--gold);
+}
+
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 2100;
+  padding: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+}
+
+.menu-toggle span {
+  display: block;
+  width: 28px;
+  height: 2px;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+.menu-toggle.active span {
+  background-color: var(--gold);
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
 }

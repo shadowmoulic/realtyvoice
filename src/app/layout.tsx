@@ -46,6 +46,7 @@ export const metadata: Metadata = {
 };
 
 import ExitIntentPopup from "@/components/ExitIntentPopup";
+import CalEmbed from "@/components/CalEmbed";
 
 export default function RootLayout({
   children,
@@ -55,6 +56,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
+        <CalEmbed />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

@@ -37,7 +37,7 @@ export default function HowItWorks() {
     ];
 
     return (
-        <main style={{ background: 'var(--bg-primary)' }}>
+        <main style={{ background: 'var(--bg-primary)' }} suppressHydrationWarning={true}>
             <Navbar />
             <section className="section" style={{
                 paddingTop: '12rem',
@@ -54,7 +54,7 @@ export default function HowItWorks() {
                             fontSize: '0.9rem',
                             marginBottom: '1.5rem'
                         }}>The Blueprint</div>
-                        <h1 style={{ fontSize: '4rem', fontWeight: 800, marginBottom: '2rem' }}>
+                        <h1 style={{ fontWeight: 800, marginBottom: '2rem' }}>
                             How It <span style={{ color: 'var(--gold)' }}>Works</span>
                         </h1>
                         <p style={{ maxWidth: '700px', margin: '0 auto', fontSize: '1.4rem', color: 'var(--text-secondary)' }}>
@@ -71,8 +71,7 @@ export default function HowItWorks() {
                             zIndex: 1
                         }}>
                             {steps.map((step, i) => (
-                                <div key={i} className="glass" style={{
-                                    padding: '3.5rem',
+                                <div key={i} className="glass step-card" style={{
                                     border: '1px solid var(--border-card)',
                                     borderRadius: '1.5rem',
                                     background: 'var(--bg-card)',

@@ -43,12 +43,12 @@ export default function Hero() {
                             Only for High-Volume Real Estate Teams
                         </div>
 
-                        <h1 style={{ fontSize: '4rem', marginBottom: '1.5rem', lineHeight: 1.1, fontWeight: 900, color: 'var(--text-primary)' }}>
+                        <h1 className="hero-title" style={{ fontWeight: 900, color: 'var(--text-primary)' }}>
                             Never Miss Another <br />
                             <span style={{ color: 'var(--gold)' }}>$20,000</span> Commission Call.
                         </h1>
 
-                        <p style={{ fontSize: '1.25rem', marginBottom: '2.5rem', maxWidth: '580px', color: 'var(--text-secondary)' }}>
+                        <p className="hero-subtitle" style={{ color: 'var(--text-secondary)' }}>
                             Turn missed calls into closed deals with an AI receptionist that qualifies leads and books showings while you&apos;re in the field.
                         </p>
 
