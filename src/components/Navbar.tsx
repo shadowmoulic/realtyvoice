@@ -11,6 +11,7 @@ export default function Navbar() {
     { name: 'Blueprint', href: '/how-it-works' },
     { name: 'ROI', href: '/pricing' },
     { name: 'Social Proof', href: '/testimonials' },
+    { name: 'Blog', href: '/blog' },
     { name: 'Our Why', href: '/about' },
     { name: 'Contact', href: '/contact-us' },
   ];

@@ -7,7 +7,11 @@ CREATE TABLE IF NOT EXISTS public.blogs (
     content TEXT NOT NULL,
     image_url TEXT,
     created_at TIMESTAMPTZ DEFAULT now(),
-    slug TEXT UNIQUE
+    slug TEXT UNIQUE,
+    meta_desc TEXT,
+    seo_title TEXT,
+    category TEXT,
+    tags TEXT -- Stored as comma separated or space separated for now
 );
 
 -- 2. Create Leads Table (for Exit-Intent and Contact Forms)

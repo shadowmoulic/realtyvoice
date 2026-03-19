@@ -25,6 +25,7 @@ export default function Footer() {
                             <Link href="/" style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Home</Link>
                             <Link href="/how-it-works" style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>The Blueprint</Link>
                             <Link href="/pricing" style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Investment ROI</Link>
+                            <Link href="/blog" style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Blog</Link>
                             <Link href="/testimonials" style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Social Proof</Link>
                             <Link href="/about" style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Our Why</Link>
                         </div>
