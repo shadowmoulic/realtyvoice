@@ -30,6 +30,7 @@ export default function Navbar() {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const navLinks = [
+    { name: 'Demos', href: '/demo' },
     { name: 'Blueprint', href: '/how-it-works' },
     { name: 'ROI', href: '/pricing' },
     { name: 'Social Proof', href: '/testimonials' },

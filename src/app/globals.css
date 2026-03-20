@@ -678,3 +678,62 @@ p {
 .blog-card:hover .arrow {
   transform: translateX(5px);
 }
+
+/* Audio Visualizer Animations */
+@keyframes wave-0 {
+  from {
+    height: 5px;
+  }
+
+  to {
+    height: 18px;
+  }
+}
+
+@keyframes wave-1 {
+  from {
+    height: 10px;
+  }
+
+  to {
+    height: 22px;
+  }
+}
+
+@keyframes wave-2 {
+  from {
+    height: 8px;
+  }
+
+  to {
+    height: 16px;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Extra utility for slower pulsing in Hero */
+@keyframes pulseSlow {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: scale(1.1);
+    opacity: 0.2;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+}
+
+.pulse-slow {
+  animation: pulseSlow 3s infinite ease-in-out;
+}
