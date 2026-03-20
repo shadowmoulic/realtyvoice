@@ -37,7 +37,7 @@ export async function GET() {
     }
 
     content += `## Contact Information\n`;
-    content += `- Email: sayak@afbf.in\n`;
+    content += `- Email: sayak@realtyvoice.online\n`;
     content += `- Technical Support: +1 (650) 252-4261\n`;
 
     return new Response(content, {

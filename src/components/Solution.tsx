@@ -18,16 +18,16 @@ export default function Solution() {
     return (
         <section id="solution" className="section" style={{ position: 'relative', background: 'var(--bg-primary)' }}>
             <div className="container">
-                <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-                    <h2 style={{ fontSize: '3.5rem', fontWeight: 900, color: 'var(--text-primary)', marginBottom: '1.5rem' }}>
+                <div className="reveal" style={{ textAlign: 'center', marginBottom: '3rem' }}>
+                    <h2 style={{ fontSize: '3rem', fontWeight: 900, color: 'var(--text-primary)', marginBottom: '1rem' }}>
                         The <span style={{ color: 'var(--gold)' }}>Instant</span> Fix.
                     </h2>
-                    <p style={{ maxWidth: '800px', margin: '0 auto', fontSize: '1.3rem', color: 'var(--text-secondary)' }}>
+                    <p style={{ maxWidth: '800px', margin: '0 auto', fontSize: '1.2rem', color: 'var(--text-secondary)' }}>
                         We plug Authority-Grade AI into your phone line. It qualifies, it books, and it ensures you never miss a commission check again.
                     </p>
                 </div>
 
-                <div style={{ marginBottom: '8rem' }}>
+                <div className="reveal" style={{ marginBottom: '4rem' }}>
                     <div className="glass" style={{ padding: '1.5rem', maxWidth: '1000px', margin: '0 auto', overflow: 'hidden', border: '1px solid var(--border-card)', boxShadow: '0 50px 100px rgba(0,0,0,0.4)' }}>
                         <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}>
                             <iframe
@@ -38,14 +38,14 @@ export default function Solution() {
                         </div>
                     </div>
                     <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-                        <p style={{ fontSize: '1.1rem', color: 'var(--gold)', fontWeight: 600 }}>↑ Watch how we capture a $1.2M lead in real-time.</p>
+                        <p style={{ fontSize: '1.1rem', color: 'var(--gold)', fontWeight: 600 }}>↑ Watch how we capture leads in real-time.</p>
                     </div>
                 </div>
 
                 <div id="features">
                     <div className="grid-cols-3" style={{ gap: '2rem' }}>
                         {features.map((f, i) => (
-                            <div key={i} className="glass" style={{ padding: '3rem', border: '1px solid var(--border-card)', background: 'rgba(255,255,255,0.02)' }}>
+                            <div key={i} className={`glass reveal delay-${(i + 1) * 100}`} style={{ padding: '3rem', border: '1px solid var(--border-card)', background: 'rgba(255,255,255,0.02)' }}>
                                 <h4 style={{ fontSize: '1.4rem', marginBottom: '1.2rem', color: 'var(--text-primary)', fontWeight: 800 }}>{f.title}</h4>
                                 <p style={{ marginBottom: 0, fontSize: '1.1rem', lineHeight: 1.6 }}>{f.desc}</p>
                             </div>
@@ -56,4 +56,3 @@ export default function Solution() {
         </section>
     );
 }
-

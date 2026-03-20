@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Star } from 'lucide-react';
 
 export default function Footer() {
     return (
@@ -34,10 +35,12 @@ export default function Footer() {
                     <div>
                         <h4 style={{ color: 'white', marginBottom: '1.5rem', fontSize: '1rem', fontWeight: 700 }}>Contact & Support</h4>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-                            <p style={{ marginBottom: 0, fontSize: '0.9rem', color: 'var(--text-muted)' }}>Email: <a href="mailto:sayak@afbf.in" style={{ color: 'white' }}>sayak@afbf.in</a></p>
+                            <p style={{ marginBottom: 0, fontSize: '0.9rem', color: 'var(--text-muted)' }}>Email: <a href="mailto:sayak@realtyvoice.online" style={{ color: 'white' }}>sayak@realtyvoice.online</a></p>
                             <p style={{ marginBottom: 0, fontSize: '0.9rem', color: 'var(--text-muted)' }}>Direct: <a href="tel:+16502524261" style={{ color: 'white' }}>+1 (650) 252-4261</a></p>
                             <div style={{ marginTop: '1rem' }}>
-                                <div style={{ fontSize: '0.8rem', color: 'var(--gold)' }}>★ ★ ★ ★ ★</div>
+                                <div style={{ display: 'flex', gap: '4px', marginBottom: '0.5rem' }}>
+                                    {[1, 2, 3, 4, 5].map(i => <Star key={i} size={14} fill="var(--gold)" color="var(--gold)" />)}
+                                </div>
                                 <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Exclusively for High-Volume US Teams</div>
                             </div>
                         </div>

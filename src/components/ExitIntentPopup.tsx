@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
+import { Gift, FireExtinguisher, Zap } from "lucide-react";
 
 export default function ExitIntentPopup() {
     const router = useRouter();
@@ -89,21 +90,18 @@ export default function ExitIntentPopup() {
 
                 {submitted ? (
                     <div className="fade-in">
-                        <div style={{ fontSize: '4rem', marginBottom: '1.5rem' }}>🔥</div>
-                        <h2 className="text-gradient" style={{ fontSize: '2rem', marginBottom: '1rem' }}>Check Your Inbox!</h2>
+                        <div style={{ color: 'var(--gold)', marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}><Zap size={64} /></div>
+                        <h2 className="text-gradient" style={{ fontSize: '2rem', marginBottom: '1rem' }}>Redirecting...</h2>
                         <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>
-                            Your blueprint is on its way. In the meantime, see it in action.
+                            Your blueprint is ready. Hang tight while we take you there.
                         </p>
-                        <button onClick={closePopup} className="btn btn-outline" style={{ width: '100%' }}>
-                            Return to RealtyVoice
-                        </button>
                     </div>
                 ) : (
                     <>
-                        <div style={{ fontSize: '3.5rem', marginBottom: '1.5rem' }}>🎁</div>
+                        <div style={{ color: 'var(--gold)', marginBottom: '1.5rem', display: 'flex', justifyContent: 'center' }}><Gift size={64} /></div>
                         <h2 className="text-gradient" style={{ fontSize: '2.25rem', marginBottom: '1.25rem' }}>The 24/7 AI Lead Capture Blueprint</h2>
                         <p style={{ marginBottom: '2.5rem', fontSize: '1.15rem' }}>
-                            Stop losing commissions to missed calls. Get the <strong>exact</strong> system top agents use to 2x their conversion rates.
+                            Stop losing commissions to missed calls. Get the <strong>exact</strong> system top agents use.
                         </p>
 
                         <form onSubmit={handleSubmit} style={{ marginBottom: '1.5rem' }}>
@@ -123,9 +121,9 @@ export default function ExitIntentPopup() {
                                 type="submit"
                                 className="btn btn-primary"
                                 disabled={isLoading}
-                                style={{ width: '100%', padding: '1rem', opacity: isLoading ? 0.7 : 1 }}
+                                style={{ width: '100%', padding: '1rem', opacity: isLoading ? 0.7 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}
                             >
-                                {isLoading ? 'Sending...' : 'Send Me the Blueprint 🚀'}
+                                {isLoading ? 'Sending...' : 'Get Instant Access'} <Zap size={18} />
                             </button>
                         </form>
                         <p style={{ margin: 0, fontSize: '0.85rem', opacity: 0.6 }}>No spam. Just value for real estate professionals.</p>

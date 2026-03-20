@@ -137,7 +137,7 @@ export default function ContactUs() {
                         <div style={{ display: 'grid', gap: '2rem' }}>
                             <div className="glass" style={{ padding: '2.5rem', background: 'var(--bg-card)', border: '1px solid var(--border-card)' }}>
                                 <div style={{ color: 'var(--gold)', fontWeight: 800, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '0.8rem' }}>Official Support</div>
-                                <h4 style={{ color: 'white', fontSize: '1.4rem', fontWeight: 700, marginBottom: '1rem' }}>sayak@afbf.in</h4>
+                                <h4 style={{ color: 'white', fontSize: '1.4rem', fontWeight: 700, marginBottom: '1rem' }}>sayak@realtyvoice.online</h4>
                                 <p style={{ margin: 0, color: 'var(--text-secondary)' }}>Direct access to technical lead.</p>
                             </div>
                             <div className="glass" style={{ padding: '2.5rem', background: 'var(--bg-card)', border: '1px solid var(--border-card)' }}>

@@ -10,7 +10,7 @@ export async function POST(request: Request) {
 
         const data = await resend.emails.send({
             from: 'RealtyVoice Leads <onboarding@resend.dev>',
-            to: ['sayak@afbf.in'],
+            to: ['sayak@realtyvoice.online'],
             subject: `🚨 New Lead: ${name} from ${source}`,
             html: `
                 <div style="font-family: sans-serif; padding: 20px; color: #333;">

@@ -56,3 +56,32 @@ This document outlines the core demo scenarios for RealtyVoice AI agents, includ
 > 1. **Signature Detection**: Analyze for "Predictive Dialer" silence (the 1-second gap before the robot speaks).
 > 2. **Voice Print**: Recognize "Pre-recorded" audio signatures and call-center background dB levels.
 > 3. **Action**: Terminate the call instantly if signature matches SPAM. Do not allow the local phone to ring.
+
+---
+
+## 🧪 Testing Scripts: Realistic Conversations
+After hitting **Test Agent**, use these scripts to simulate how a high-quality real estate lead actually talks. 
+
+### Scenario A: The High-Intent Buyer ($800k+ Lead)
+**Goal**: Test how the AI handles qualification and booking.
+1. **Initial Inquiry**: "Hi, I'm calling about the house on 122 Elm Street. Is it still available?"
+2. **Handle Qualification**: When the AI asks if you're pre-approved, say: "Yes, we just got our letter for $850k last week. We’re first-time buyers and need to move by July."
+3. **The Close**: When the AI offers a showing, say: "Saturday morning would be perfect. Can we do 10:00 AM?"
+
+### Scenario B: The Skeptical Seller (Listing Lead)
+**Goal**: Test how the AI builds rapport and captures seller motivation.
+1. **Initial Inquiry**: "I'm thinking about selling my place in West Heights, but I’m just trying to get an idea of what it’s worth before I commit to an agent."
+2. **Handle Motivation**: When the AI asks why you're selling, say: "We're actually looking to downsize. Our kids just finished college and we don't need all this extra space anymore."
+3. **The Close**: When the AI offers a valuation call, say: "Yeah, a quick call with a specialist would be helpful. Let's do Monday afternoon."
+
+### Scenario C: The Rental Filter
+**Goal**: Test the "Gatekeeper" logic for rental requirements.
+1. **Initial Inquiry**: "Hey, I saw the listing for the condo on 5th Ave. Can I come see it today?"
+2. **Handle Requirements**: When the AI mentions the credit score (e.g., 680+), say: "My credit is around 720 and I've been at my job for 5 years. I make about $9k a month."
+3. **The Close**: "I'd love to see it after 5 PM if that works."
+
+### Scenario D: The "Difficult" Lead (Edge Case)
+**Goal**: Test the AI's ability to stay on track.
+1. **The Distraction**: "Hi, I'm interested in the house, but first—do you know if the schools in this area are any good?"
+2. **The Pivot**: Let the AI answer, then say: "Actually, I also need to know if the seller is open to a 60-day closing period."
+3. **The Close**: "If they are, I'd like to book a walkthrough tomorrow."

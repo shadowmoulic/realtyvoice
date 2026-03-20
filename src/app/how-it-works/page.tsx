@@ -1,38 +1,39 @@
 "use client"
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Phone, Brain, Hash, Workflow, Gift, Zap } from "lucide-react";
 
 export default function HowItWorks() {
     const steps = [
         {
             title: "10-Min Discovery",
             desc: "We hop on a quick call to understand your business, your tone, and your specific listings.",
-            icon: "📞"
+            icon: <Phone size={32} />
         },
         {
             title: "Custom AI Agent",
             desc: "We build a bespoke AI voice agent trained specifically on your brand and service area.",
-            icon: "🧠"
+            icon: <Brain size={32} />
         },
         {
             title: "No-Cost Number",
             desc: "We provide a dedicated number at no extra cost. Simply forward your missed calls to it.",
-            icon: "☎️"
+            icon: <Hash size={32} />
         },
         {
             title: "Seamless Flow",
             desc: "Connected to Cal.com for events and Google Sheets for a simple, straightforward CRM.",
-            icon: "⚙️"
+            icon: <Workflow size={32} />
         },
         {
             title: "7-Day Trial",
             desc: "Work with us for 7 days. If you don't love the results, you ditch us. No hard feelings.",
-            icon: "🎁"
+            icon: <Gift size={32} />
         },
         {
             title: "Scale Faster",
             desc: "Never miss a lead again. Focus on closings while your AI handles the first touch.",
-            icon: "🚀"
+            icon: <Zap size={32} />
         }
     ];
 
@@ -91,14 +92,15 @@ export default function HowItWorks() {
                                     <div style={{
                                         fontSize: '2.5rem',
                                         marginBottom: '2rem',
-                                        background: 'rgba(124, 58, 237, 0.1)',
+                                        background: 'rgba(212, 175, 55, 0.1)',
                                         width: '70px',
                                         height: '70px',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
-                                        borderRadius: '50%',
-                                        border: '1px solid rgba(124, 58, 237, 0.2)'
+                                        borderRadius: '1.2rem',
+                                        border: '1px solid rgba(212, 175, 55, 0.2)',
+                                        color: 'var(--gold)'
                                     }}>{step.icon}</div>
                                     <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', fontWeight: 700, color: 'var(--text-primary)' }}>{step.title}</h3>
                                     <p style={{ margin: 0, fontSize: '1.15rem', lineHeight: 1.7, color: 'var(--text-secondary)' }}>{step.desc}</p>

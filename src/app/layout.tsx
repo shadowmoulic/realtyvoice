@@ -71,7 +71,7 @@ export default function RootLayout({
                 "@type": "ContactPoint",
                 "telephone": "+16502524261",
                 "contactType": "customer service",
-                "email": "sayak@afbf.in"
+                "email": "sayak@realtyvoice.online"
               }
             })
           }}

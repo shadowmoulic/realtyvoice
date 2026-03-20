@@ -1,12 +1,15 @@
 "use client"
 
+import { Star, Phone } from "lucide-react";
+
 export default function Hero() {
     return (
         <section className="section" style={{
-            minHeight: '100vh',
+            minHeight: '80vh',
             display: 'flex',
             alignItems: 'center',
-            paddingTop: '6rem',
+            paddingTop: '2rem',
+            paddingBottom: '2rem',
             position: 'relative',
             background: 'linear-gradient(to bottom, #0B0B12, #1A1333)',
             overflow: 'hidden'
@@ -18,13 +21,13 @@ export default function Hero() {
                 left: '0',
                 width: '100%',
                 height: '100%',
-                background: 'radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.05) 0%, transparent 70%)',
+                background: 'radial-gradient(circle at 50% 50%, rgba(109, 41, 216, 0.05) 0%, transparent 70%)',
                 zIndex: 0
             }}></div>
 
             <div className="container" style={{ position: 'relative', zIndex: 1 }}>
                 <div className="grid-cols-2 hero-responsive">
-                    <div className="fade-in">
+                    <div className="fade-in reveal-left">
                         <div style={{
                             display: 'inline-flex',
                             alignItems: 'center',
@@ -34,8 +37,8 @@ export default function Hero() {
                             fontSize: '0.85rem',
                             fontWeight: 600,
                             color: 'var(--gold)',
-                            marginBottom: '2rem',
-                            marginTop: '2rem',
+                            marginBottom: '1rem',
+                            marginTop: '4rem',
                             background: 'rgba(212, 175, 55, 0.1)',
                             border: '1px solid rgba(212, 175, 55, 0.2)'
                         }}>
@@ -43,7 +46,7 @@ export default function Hero() {
                             Only for High-Volume Real Estate Teams
                         </div>
 
-                        <h1 className="hero-title" style={{ fontWeight: 900, color: 'var(--text-primary)' }}>
+                        <h1 className="hero-title" style={{ fontWeight: 900, color: 'var(--text-primary)', fontSize: '3.2rem' }}>
                             Never Miss Another <br />
                             <span style={{ color: 'var(--gold)' }}>$20,000</span> Commission Call.
                         </h1>
@@ -88,15 +91,17 @@ export default function Hero() {
                         </div>
                     </div>
 
-                    <div className="fade-in" style={{ position: 'relative' }}>
+                    <div className="fade-in" style={{ position: 'relative', marginTop: '-6rem' }}>
                         <div className="glass" style={{
-                            padding: '2.5rem',
+                            padding: '1.5rem',
                             position: 'relative',
                             boxShadow: '0 40px 80px -20px rgba(0, 0, 0, 0.8)',
                             background: 'rgba(20, 20, 28, 0.8)',
                             border: '1px solid var(--glass-border)',
                             borderRadius: '1.5rem',
-                            minHeight: '450px'
+                            minHeight: '340px',
+                            transform: 'scale(0.85)',
+                            transformOrigin: 'top right'
                         }}>
                             {/* Chat UI Visual */}
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -172,7 +177,7 @@ export default function Hero() {
                             boxShadow: '0 0 20px rgba(212, 175, 55, 0.1)'
                         }}>
                             <div style={{ width: '40px', height: '40px', background: 'var(--primary)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
-                                📞
+                                <Phone size={20} />
                             </div>
                             <div>
                                 <div style={{ fontWeight: 800, fontSize: '1.2rem', color: 'var(--text-primary)' }}>100%</div>

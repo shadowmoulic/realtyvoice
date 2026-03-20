@@ -1,8 +1,10 @@
 :root {
-  /* Primary Color (Brand Violet) */
-  --primary: #7C3AED;
-  --primary-deep: #5B21B6;
-  --primary-soft: #A78BFA;
+  /* New Brand Purple (Replacing Red/Violet mix) */
+  --primary: #6D29D8;
+  --primary-deep: #4F1BB0;
+  --primary-soft: #8B5CF6;
+  --accent-red: #6D29D8;
+  /* Replacing Red with the user's requested Purple */
 
   /* Gold Accent (Premium Touch) */
   --gold: #D4AF37;
@@ -168,7 +170,7 @@ p {
 
 
 .section {
-  padding: 8rem 0;
+  padding: 4rem 0;
 }
 
 /* Stable Layout Classes */
@@ -262,7 +264,54 @@ p {
 }
 
 .glow:hover {
-  box-shadow: 0 0 50px rgba(124, 58, 237, 0.6), 0 0 20px rgba(212, 175, 55, 0.4);
+  box-shadow: 0 0 50px rgba(109, 41, 216, 0.6), 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+/* Scroll Reveal System */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-left.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-right.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.delay-100 {
+  transition-delay: 100ms;
+}
+
+.delay-200 {
+  transition-delay: 200ms;
+}
+
+.delay-300 {
+  transition-delay: 300ms;
 }
 
 .desktop-only {
@@ -338,7 +387,7 @@ p {
 }
 
 .pricing-card {
-  padding: 4rem;
+  padding: 3rem;
 }
 
 .price-tag {
