@@ -163,9 +163,9 @@ export default function Demos({ showAll = false }: { showAll?: boolean }) {
                     </p>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '2rem' }}>
+                <div className="demo-cards-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '2rem' }}>
                     {displayedDemos.map((demo, i) => (
-                        <div key={demo.id} className={`glass reveal delay-${(i + 1) * 50}`} style={{
+                        <div key={demo.id} className={`glass reveal demo-card delay-${(i + 1) * 50}`} style={{
                             padding: '2.5rem',
                             border: `1px solid ${playingId === demo.id ? demo.color : 'rgba(255,255,255,0.05)'}`,
                             background: 'var(--bg-card)',
