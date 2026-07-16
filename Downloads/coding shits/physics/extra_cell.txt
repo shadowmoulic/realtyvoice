@@ -1,0 +1,73 @@
+# ==============================================================================
+# DIAGNOSTIC: C vs D IN SIGNAL AND BACKGROUND REGIONS
+# ==============================================================================
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.gridspec import GridSpec
+
+# Grab data (assuming 'data_raw' or 'tracks' is already loaded without strict cuts yet)
+df = tracks.copy()
+
+# Filter into the two physical regions using your existing spatial config
+sig_tracks = df[
+    (df['x'] >= SIG_XMIN) & (df['x'] <= SIG_XMAX) &
+    (df['y'] >= SIG_YMIN) & (df['y'] <= SIG_YMAX)
+]
+
+bg_tracks = df[
+    (df['x'] >= BG_XMIN) & (df['x'] <= BG_XMAX) &
+    (df['y'] >= BG_YMIN) & (df['y'] <= BG_YMAX)
+]
+
+# Set up binning
+d_bins = np.linspace(0, 25, 100)
+c_bins = np.linspace(0, 100, 100)
+
+def plot_cvsd_panel(ax_main, ax_top, ax_right, data, title, color, cmap):
+    # 2D Histogram Contour
+    H, xedges, yedges = np.histogram2d(data['d'], data['c'], bins=[d_bins, c_bins])
+    X, Y = np.meshgrid(xedges[:-1], yedges[:-1])
+
+    # Only draw contours if there are enough tracks to avoid errors
+    if H.max() > 10:
+        levels = np.logspace(np.log10(10), np.log10(H.max()), 8)
+        ax_main.contour(X, Y, H.T, levels=levels, cmap=cmap, linewidths=1.5)
+
+    ax_main.set_xlabel(r'Track Diameter ($\mu$m)')
+    ax_main.set_ylabel(r'Track Contrast (%)')
+    ax_main.set_xlim(0, 15)
+    ax_main.set_ylim(0, 80)
+
+    # Top 1D Projection (Diameter)
+    d_hist = np.sum(H, axis=1)
+    ax_top.bar(xedges[:-1], d_hist, width=np.diff(xedges), color=color, align='edge')
+    ax_top.set_ylabel('TPF/bin')
+    ax_top.tick_params(labelbottom=False)
+    ax_top.set_title(title, fontsize=12)
+
+    # Right 1D Projection (Contrast)
+    c_hist = np.sum(H, axis=0)
+    ax_right.barh(yedges[:-1], c_hist, height=np.diff(yedges), color=color, align='edge')
+    ax_right.set_xlabel('TPF/bin')
+    ax_right.tick_params(labelleft=False)
+
+# Create a wide figure to hold both plots side-by-side
+fig = plt.figure(figsize=(14, 6), dpi=150)
+
+# Left Layout (Background Region)
+gs_left = GridSpec(4, 4, left=0.05, right=0.45, hspace=0.1, wspace=0.1)
+ax_main_bg = fig.add_subplot(gs_left[1:4, 0:3])
+ax_top_bg = fig.add_subplot(gs_left[0, 0:3], sharex=ax_main_bg)
+ax_right_bg = fig.add_subplot(gs_left[1:4, 3], sharey=ax_main_bg)
+
+plot_cvsd_panel(ax_main_bg, ax_top_bg, ax_right_bg, bg_tracks, "Background Region", 'darkorange', 'Oranges')
+
+# Right Layout (Signal Region)
+gs_right = GridSpec(4, 4, left=0.55, right=0.95, hspace=0.1, wspace=0.1)
+ax_main_sig = fig.add_subplot(gs_right[1:4, 0:3])
+ax_top_sig = fig.add_subplot(gs_right[0, 0:3], sharex=ax_main_sig)
+ax_right_sig = fig.add_subplot(gs_right[1:4, 3], sharey=ax_main_sig)
+
+plot_cvsd_panel(ax_main_sig, ax_top_sig, ax_right_sig, sig_tracks, "Signal Region (Signal + Noise)", 'steelblue', 'Blues')
+
+plt.show()

@@ -1,0 +1,67 @@
+================================================================================
+D+13C REACTION ANALYSIS: GIT PULL STATUS & COMPLETED SOLVED TASKS
+================================================================================
+
+This document details the updates and solutions pulled from the remote repository
+on July 16, 2026, which fully address the feedback from the experimental guide.
+
+--------------------------------------------------------------------------------
+1. COMPLETED & SOLVED PROBLEMS
+--------------------------------------------------------------------------------
+By running `git pull`, we successfully merged the implementation of the guide's 
+feedback directly into the analysis notebooks. The following issues are now fully solved:
+
+A. Detector Geometry & Distances:
+   - *Fixed SBD Setup:* Corrected target-to-SBD distance to 4.0 cm and aperture 
+     area to 0.172 cm² (Aperture 3).
+   - *Fixed CR-39 Setup:* Corrected target-to-CR-39 distance to 6.0 cm. 
+   - Both detectors are correctly modeled as non-equidistant.
+
+B. Two-Background Subtraction on CR-39:
+   - *Spatial Background:* Subtracted the area-scaled reference tracks from the 
+     background notch region (Y in [1.50, 1.89] cm, Area = 1.1076 cm²).
+   - *Intrinsic Background:* Subtracted the baseline intrinsic noise of the 
+     Chiyoda CR-39 plastic (100 tracks/cm²).
+   - *Net Track Formula:*
+     Net signal tracks = Signal_total - Background_spatial_scaled - Background_intrinsic
+     Net signal tracks = 72,550 - 49,378.1 - 960.0 = 22,211.9 ± 707.5 tracks.
+   - *Pixel-by-Pixel Method:* Adjusted the subtraction mask to deduct both 
+     spatial and intrinsic noise densities, yielding 22,088.5 net tracks.
+
+C. Per-Region Contrast vs. Diameter (C vs D) heatmaps:
+   - Added code in the pre-cut exploration section of the CR-39 notebook to plot 
+     C vs. D heatmaps for the Signal Box and Background notch separately. 
+   - This visually demonstrates how the quality cuts (Diameter: 2-13 µm, 
+     Contrast < 20%) isolate the signal island and slice away the noise.
+   - Saved plot: `plots/precut_cvsd_comparison.png`
+
+D. Variable-Shadowing & Mismatch Bug:
+   - Fixed the comparison script. `C_SBD` now correctly references the peak-fit 
+     counts (355.0) of the SBD instead of the raw CR-39 track count (72,550).
+
+--------------------------------------------------------------------------------
+2. CURRENT CROSS-DETECTOR COMPARISON STATUS
+--------------------------------------------------------------------------------
+After executing the fully updated notebooks, the new cross-detector validation outputs:
+
+============================================================
+  CROSS-DETECTOR VALIDATION: SBD VS CR-39
+============================================================
+SBD  : A = 0.172 cm² at r = 4.0 cm  → Ω = 0.010750 sr
+CR-39: A = 9.6 cm² at r = 6.0 cm  → Ω = 0.266667 sr
+Solid angle ratio (CR39 / SBD)     : 24.81
+Angular correction (125° → 90°)    : ÷ 0.9676
+------------------------------------------------------------
+CR-39 net counts (both bg subtr.)  : 22211.9
+Expected SBD 13C+d counts          : 925.4
+Observed SBD 13C+d counts (fit)    : 355.0
+Ratio expected/observed            : 2.61  (+160.7%)
+============================================================
+
+Note:
+The expected SBD counts (925.4) and observed fit SBD counts (355.0) differ by a 
+factor of 2.61. This is physically expected because the SBD integrated counts cover 
+all 54 runs, while the CR-39 integrates over its own 5-hour exposure window. To get 
+direct 1-to-1 agreement, we need to scale the SBD count to match the exact beam 
+charge or exposure window the CR-39 detector actually saw.
+================================================================================

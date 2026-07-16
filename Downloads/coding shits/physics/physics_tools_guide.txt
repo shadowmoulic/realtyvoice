@@ -1,0 +1,58 @@
+# MIT PSFC-HEDP Nuclear Physics Tools Guide
+
+This guide provides an in-depth breakdown of the 6 nuclear physics software tools you just cloned. These tools are primarily used by the Plasma Science and Fusion Center (PSFC) at MIT for High Energy Density Physics (HEDP) and Inertial Confinement Fusion (ICF) research.
+
+
+---
+
+## 6. WRF_Analysis
+- **What it is**: Analysis utilities for "rhoR" models and WRF (Wedge Range Filter) spectrometers.
+- **Physics Context**: "rhoR" (ρR) stands for Areal Density. It is a measurement of how tightly the nuclear fuel is compressed. If ρR is too low, the particles escape before fusion can happen. WRF spectrometers are tools used to measure the proton spectrum to calculate this ρR.
+- **Why it's important**: Measures one of the most critical factors for achieving nuclear fusion ignition.
+- **Languages used**: Python.
+
+## 2. CR39py
+- **What it is**: A Python code for processing CR-39 track data.
+- **Physics Context**: CR-39 is a special plastic used as a particle detector. When protons or alpha particles hit it, they leave microscopic craters. Researchers scan this plastic under a microscope and use code to measure the sizes of the craters to determine the energy of the particles.
+- **Why it's important**: It's a standard, direct way to measure the results of a nuclear fusion experiment.
+- **Languages used**: Python.
+
+---
+
+## 3. MRSt
+- **What it is**: Monte Carlo simulations for the Magnetic Recoil Spectrometer (MRS).
+- **Physics Context**: The MRS is a giant diagnostic tool attached to massive lasers (like the National Ignition Facility). It measures the spectrum of neutrons coming out of a fusion explosion. Because neutrons don't have a charge, you have to hit them into a foil, and then measure the recoil of charged particles using magnets. This code simulates that messy process using statistics (Monte Carlo).
+- **Why it's important**: Used for analyzing the most critical data (neutron yield) from the world's biggest fusion experiments.
+- **Languages used**: Java.
+
+---
+
+## 4. cps-analysis
+- **What it is**: A tool to extract mean energies and yields from CPS (Charged-Particle Spectrometer) scans.
+- **Physics Context**: Similar to the MRS, but specifically for charged particles (protons, alphas, deuterons). It uses magnets to bend the path of the particles so they hit a detector at different locations based on their energy.
+- **Why it's important**: Helps researchers quickly figure out exactly how many particles were produced and what their energies were.
+- **Languages used**: Python.
+
+---
+
+## 5. lettuce
+- **What it is**: A suite of scripts for running and processing LILAC and IRIS simulations.
+- **Physics Context**: LILAC is a famous 1D radiation-hydrodynamics simulation code. It simulates what happens when you blast a tiny capsule of fusion fuel with lasers—how it compresses, heats up, and (hopefully) fuses. 
+- **Why it's important**: Before doing an experiment that costs millions of dollars, researchers run these simulations to predict what will happen. This repository helps automate running those simulations and graphing the results.
+- **Languages used**: Python.
+
+---
+---
+
+## 1. StopPow
+- **What it is**: A C++ library for calculating "Stopping Power."
+- **Physics Context**: When nuclear fusion happens, charged particles (like alpha particles) are created and shoot out at high speeds. As they travel through plasma or solid material, they lose energy ("stop"). Stopping power tells you how fast they lose energy. 
+- **Why it's important**: If you want to know if a fusion reaction will ignite (sustain itself), you need to know if the alpha particles will deposit their energy back into the plasma or escape.
+- **Languages used**: C++ (with wrappers for Python and Java).
+
+
+---
+## Summary of How to Use Them:
+- If she works with **Neutrons**, she probably uses **MRSt**.
+- If she works with **Protons/Alphas hitting plastic detectors**, she uses **CR39py** or **cps-analysis** or **WRF_Analysis**.
+- If she does **Theory/Simulation**, she uses **lettuce** or **StopPow**.
